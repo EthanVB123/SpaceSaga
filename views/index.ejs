@@ -1,1 +1,28 @@
-Space Saga
+<link rel='stylesheet' href='/stylesheets/main.css'>
+<div>
+<h1>Space Saga</h1>
+</div>
+<div>
+    <span style='position: fixed; left: 5vw; top: 30vh; width: 40vw; border: 1px solid black' class='buttons'>
+        <div><button type="button" class='majorbtn'>Host Game</button></div>
+        <div><button type="button" class='majorbtn'>Resume Game</button></div>
+        <div><button type="button" class='majorbtn'>Credits</button></div>
+    </span>
+    <span style='position: fixed; left: 55vw; top: 30vh; width: 40vw; border: 1px solid black'>
+        <div>
+            <h3><i>Lobby</i></h3>
+            <hr style="width: 80%"> 
+        </div>
+        <div>
+            <%# Here, put in all the games for joining - this should be a forEach() or something, here is one sample %>
+            <%- include('./partials/lobbygame',
+            {
+                name: 'John',
+                password: true,
+                numPlayers: 4,
+                maxPlayers: 6
+            }) %> 
+             
+        </div>
+    </span>
+</div>
