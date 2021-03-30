@@ -4,7 +4,7 @@
 button {
     align-self: center;
     font-size: 1em;
-    padding: 0.3em;
+    padding: 8px;
     text-align: center;
     font-family: "Consolas", Arial;
     transition-duration: 2000ms;
