@@ -1,20 +1,45 @@
 * {
     background-color: #e4dfda80;
 }
-
-.majorbtn {
-    left: 50%;
-    padding: 0.7em;
-    font-size: 1.3em;
+button {
+    align-self: center;
+    font-size: 1em;
+    padding: 0.3em;
     text-align: center;
     font-family: "Consolas", Arial;
     transition-duration: 2000ms;
 }
-.majorbtn:hover {
+.majorbtn {
+    left: 50%;
+    /*padding: 0.7em 20vw;*/
+    font-size: 1.3em;
+}
+button:hover {
     background-color: #aaa;
 }
-.buttons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+.title {
+    text-align: center;
+    font-size: 5em;
+}
+table, th, td {
+    border: 1px solid black;
+}
+th, td {
+    padding: 10px;
+}
+a.button {
+
+    text-decoration: none;
+    color: initial;
+    padding: 8px;
+    border-top: 2px solid #888;
+    border-left: 2px solid #888;
+    border-bottom: 2px solid #333;
+    border-right: 2px solid #333;
+    font-family: Consolas;
+    transition-duration: 2000ms;
+}
+a.button:hover {
+    background-color: #aaa;
 }

@@ -10,6 +10,7 @@ const expressLayouts = require("express-ejs-layouts")
 
 // Here are my routers
 const indexRouter = require('./routes/index.js')
+const setupRouter = require('./routes/setup.js')
 
 app.set("view engine", "ejs")
 app.set("views", `${__dirname}/views`)
@@ -25,6 +26,8 @@ mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true})
 const db = mongoose.connection
 db.on('error', error => console.error(error))
 db.once('open', () => console.log('Connected to Mongoose'))
+
 app.use('/', indexRouter)
+app.use('/setup', setupRouter)
 
 app.listen(process.env.PORT || 3000)
