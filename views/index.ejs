@@ -4,7 +4,7 @@
 </div>
 <div>
     <span style='position: fixed; left: 5vw; top: 35vh; width: 40vw; border: 1px solid black; height: 50vh; align-items: center;' class='buttons'>
-        <div><button type="button" class='majorbtn' style="padding: 0.7em (20vw-4ch);">Host Game</button></div>
+        <div><a class="button majorbtn" href='/game/new'>Host Game</a></div>
         <br>
         <div><button type="button" class='majorbtn'>Resume Game</button></div>
         <br>
@@ -23,13 +23,16 @@
                     <th>Players</th>
                 </tr>
             <%# Here, put in all the games for joining - this should be a forEach() or something, here is one sample %>
-                <%- include('./partials/lobbygame',
-                {
-                    name: 'John',
-                    password: true,
-                    numPlayers: 4,
-                    maxPlayers: 6
-                }) %> 
+                <% games.forEach(element => { %>
+                    <%- include('./partials/lobbygame',
+                        {
+                            name: element.name,
+                            password: element.password,
+                            numPlayers: 0,
+                            maxPlayers: 4
+                        }) %> 
+                <% }); %> 
+                
             </table>
 
              

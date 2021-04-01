@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router()
-const game = require('../models/game')
+const Game = require('../models/game')
 const Player = require('../models/player')
 
-// Index route redirects to homepage
+// Index route has list of players
 router.get('/', async (req, res) => {
     //try {
         allPlayerNames = ''
@@ -36,6 +36,7 @@ router.post('/', async (req, res) => {
         console.error('Error creating Player')
     }
 })
+
 
 // I'm a teapot
 router.get('/teapot', (req, res) => {

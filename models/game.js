@@ -16,22 +16,18 @@ const gameSchema = new mongoose.Schema({
     }, */ // Implement this later - for now is always 4
     player1: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
         ref: 'Player' 
     },
     player2: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
         ref: 'Player' 
     },
     player3: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
         ref: 'Player' 
     },
     player4: {
         type: mongoose.Schema.Types.ObjectId,
-        required: true,
         ref: 'Player' 
     }
 
