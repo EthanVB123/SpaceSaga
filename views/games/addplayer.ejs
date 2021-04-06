@@ -1,0 +1,23 @@
+<h2>Join Game</h2>
+<form action='/game' method='POST'>
+
+    <% if (numberPlayers == 0) { %> 
+        <label>Player 1</label>
+        <input type="text" name="player1" value="<%= game.player1 %>">
+    <% } else if (numberPlayers == 1) { %> 
+        <label>Player 2</label>
+        <input type="text" name="player1" value="<%= game.player1 %>">
+    <% } else if (numberPlayers == 2) { %>
+        <label>Player 3</label>
+        <input type="text" name="player1" value="<%= game.player1 %>">
+    <% } else if (numberPlayers == 3) { %>
+        <label>Player 4</label>
+        <input type="text" name="player1" value="<%= game.player1 %>">
+    <% } else if (numberPlayers == 4) { %>
+        <p>This game is full.</p>
+    <% } %> 
+
+
+    <a class='button' href='/'>Cancel Game</a>
+    <button type="submit" class='button'>Join Game</button>
+</form>

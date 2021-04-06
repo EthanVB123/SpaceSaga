@@ -33,4 +33,21 @@ const gameSchema = new mongoose.Schema({
 
 })
 
+gameSchema.virtual('numberPlayers').get(function() {
+    var num = 0;
+    if ((this.player1 != null)&&(this.player1 != undefined)) {
+        num += 1;
+    }
+    if ((this.player2 != null)&&(this.player2 != undefined)) {
+        num += 1;
+    }
+    if ((this.player3 != null)&&(this.player3 != undefined)) {
+        num += 1;
+    }
+    if ((this.player4 != null)&&(this.player4 != undefined)) {
+        num += 1;
+    }
+    return num
+})
+
 module.exports = mongoose.model('Game', gameSchema)
