@@ -28,13 +28,13 @@ router.post('/', async (req, res) => {
     const player = new Player({
         name: req.body.name
     })
-    try {
+    //try {
         const newPlayer = await player.save()
         res.redirect(`setup/${newPlayer.name}`)
-    } catch {
+    /*} catch {
         res.redirect('/')
         console.error('Error creating Player')
-    }
+    }*/
 })
 
 

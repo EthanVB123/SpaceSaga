@@ -6,10 +6,10 @@ const playerSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    game: {
+    /*game: {
         type: mongoose.Schema.Types.ObjectId,
         required: true
-    }
+    }*/
     // more later
 
 })
