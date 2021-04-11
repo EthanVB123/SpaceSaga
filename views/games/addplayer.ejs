@@ -1,37 +1,12 @@
 <h2>Join Game</h2>
 <form action='/game/<%= game.id %>?_method=PUT' method='POST'>
 
-    <% if (numberPlayers == 0) { %> 
-        <label>Player 1</label>
-        <select name='player1'>
-            <% players.forEach(player => { %>
-                <option label='<%= player.name %>' value='<%= player.id %>'></option> 
-            <% }) %> 
-        </select>
-    <% } else if (numberPlayers == 1) { %> 
-        <label>Player 2</label>
-        <select name='player1'>
-            <% players.forEach(player => { %>
-                <option label='<%= player.name %>' value='<%= player.id %>'></option> 
-            <% }) %> 
-        </select>    
-    <% } else if (numberPlayers == 2) { %>
-        <label>Player 3</label>
-        <select name='player1'>
-            <% players.forEach(player => { %>
-                <option label='<%= player.name %>' value='<%= player.id %>'></option> 
-            <% }) %> 
-        </select>    
-    <% } else if (numberPlayers == 3) { %>
-        <label>Player 4</label>
-        <select name='player1'>
-            <% players.forEach(player => { %>
-                <option label='<%= player.name %>' value='<%= player.id %>'></option> 
-            <% }) %> 
-        </select>    
-    <% } else if (numberPlayers == 4) { %>
-        <p>This game is full.</p>
-    <% } %> 
+    <label>Add Player</label>
+    <select name='player'>
+        <% players.forEach(player => { %>
+            <option label='<%= player.name %>' value='<%= player.id %>'></option> 
+        <% }) %> 
+    </select>
 
 
     <a class='button' href='/'>Cancel Game</a>

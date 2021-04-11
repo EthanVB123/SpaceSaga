@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Game = require('../models/game')
 const Player = require('../models/player')
+const mongoose = require('mongoose')
 
 // Index route redirects to homepage
 router.get('/', async (req, res) => {
@@ -50,7 +51,7 @@ router.get('/teapot', (req, res) => {
 
 // Joined Game Route
 router.get('/:id', (req, res) => {
-    let txt = `${req.params.id}'s Game <br>`
+    let txt = `${req.params.id} <br>`
     txt += `Player 1: ${Game.findById(req.params.id).player1} <br>`
     txt += `Player 2: ${Game.findById(req.params.id).player2} <br>`
     txt += `Player 3: ${Game.findById(req.params.id).player3} <br>`
@@ -83,17 +84,18 @@ router.put('/:id', async (req, res) => {
                 game.player2 = game.player2
                 if (game.player3 != undefined) {
                     game.player3 = game.player3
-                    game.player4 = Player.findById(req.body.player4)
+                    game.player4 = Player.findById(mongoose.Types.ObjectId(req.body.player))
                 } else {
-                    game.player3 = Player.findById(req.body.player3)
+                    game.player3 = Player.findById(mongoose.Types.ObjectId(req.body.player))
                 }
             } else {
-                    game.player2 = Player.findById(req.body.player2)
+                    game.player2 = Player.findById(mongoose.Types.ObjectId(req.body.player))
             }
             
         } else {
-            game.player1 = Player.findById(req.body.player1)
-            // console.log(`Player 1: ${req.body.player1}`)
+            console.log(req.body.player)
+            game.player1 = Player.findById(mongoose.Types.ObjectId(req.body.player))
+            // console.log(`Player 1: ${req.body.player}`)
         }
         await game.save()
         res.redirect(`${game.id}`) //For testing purposes - change back later
