@@ -84,22 +84,20 @@ router.put('/:id', async (req, res) => {
                 game.player2 = game.player2
                 if (game.player3 != undefined) {
                     game.player3 = game.player3
-                    game.player4 = Player.findById(mongoose.Types.ObjectId(req.body.player))
+                    game.player4 = Player.findById(mongoose.Types.ObjectId(req.body.playerselect))
                 } else {
-                    game.player3 = Player.findById(mongoose.Types.ObjectId(req.body.player))
+                    game.player3 = Player.findById(mongoose.Types.ObjectId(req.body.playerselect))
                 }
             } else {
-                    game.player2 = Player.findById(mongoose.Types.ObjectId(req.body.player))
+                    game.player2 = Player.findById(mongoose.Types.ObjectId(req.body.playerselect))
             }
             
         } else {
-            console.log(req.body.player)
-            game.player1 = Player.findById(mongoose.Types.ObjectId(req.body.player))
-            // console.log(`Player 1: ${req.body.player}`)
+            console.log(req.body.playerselect)
+            game.player1 = Player.findById(req.body.playerselect)
         }
         await game.save()
-        res.redirect(`${game.id}`) //For testing purposes - change back later
-        //res.redirect('/') // Delete
+        res.redirect(`${game.id}`) 
     /*} catch {
         if (game == null) {
             res.redirect('/')
