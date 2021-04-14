@@ -50,13 +50,14 @@ router.get('/teapot', (req, res) => {
 })
 
 // Joined Game Route
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
+    const game = await Game.findById(req.params.id)
     let txt = `${req.params.id} <br>`
-    txt += `Player 1: ${Game.findById(req.params.id).player1} <br>`
-    txt += `Player 2: ${Game.findById(req.params.id).player2} <br>`
-    txt += `Player 3: ${Game.findById(req.params.id).player3} <br>`
-    txt += `Player 4: ${Game.findById(req.params.id).player4} <br>`
-    
+    txt += `Player 1: ${game.player1} <br>`
+    txt += `Player 2: ${game.player2} <br>`
+    txt += `Player 3: ${game.player3} <br>`
+    txt += `Player 4: ${game.player4} <br>`
+    txt += `Game: ${game}` // for testing only
     res.send(txt)
 })
 
@@ -78,24 +79,27 @@ router.put('/:id', async (req, res) => {
         game = await Game.findById(req.params.id)
         game.name = game.name
         game.password = game.password
-        if (game.player1 != undefined) {
-            game.player1 = game.player1
-            if (game.player2 != undefined) {
-                game.player2 = game.player2
-                if (game.player3 != undefined) {
-                    game.player3 = game.player3
-                    game.player4 = Player.findById(mongoose.Types.ObjectId(req.body.playerselect))
-                } else {
-                    game.player3 = Player.findById(mongoose.Types.ObjectId(req.body.playerselect))
-                }
-            } else {
-                    game.player2 = Player.findById(mongoose.Types.ObjectId(req.body.playerselect))
-            }
-            
+        if (game.player1 == undefined) {
+            game.player1 = req.body.playerselect
         } else {
-            console.log(req.body.playerselect)
-            game.player1 = Player.findById(req.body.playerselect)
+            game.player1 = game.player1
+            if (game.player2 == undefined) {
+                game.player2 = req.body.playerselect
+            } else {
+                game.player2 = game.player2
+                if (game.player3 == undefined) {
+                    game.player3 == req.body.playerselect
+                } else {
+                    game.player3 = game.player3
+                    if (game.player4 == undefined) {
+                        game.player4 = req.body.playerselect
+                    } else {
+                        game.player4 = game.player4
+                    }
+                }
+            }
         }
+    
         await game.save()
         res.redirect(`${game.id}`) 
     /*} catch {
