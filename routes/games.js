@@ -65,6 +65,31 @@ router.get('/:id', async (req, res) => {
 // Edit Game Route - mainly used to add a player to the game
 
 // Add Player Route
+router.get('/:id/password', async (req, res) => {
+    try {   
+        const game = await Game.findById(req.params.id)
+        res.render('games/password', {game: game})
+    } catch {
+        res.redirect('/')
+    }
+})
+router.post('/:id/password', async (req, res) => {
+    try {
+        const game = await Game.findById(req.params.id)
+        const gamePwd = game.password
+        const givenPwd = req.body.password
+        if (gamePwd == givenPwd) {
+            res.redirect(`/game/${req.params.id}/edit`)
+        } else {
+            alert('Incorrect password!')
+            console.error('Incorrect password')
+            res.redirect('/')
+        }
+    } catch {
+        console.error('Password post is stuffed')
+        res.redirect('/')
+    }
+})
 router.get('/:id/edit', async (req, res) => {
     try {
         const players = await Player.find({})
