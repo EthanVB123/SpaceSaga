@@ -3,6 +3,7 @@ const router = express.Router()
 const Game = require('../models/game')
 const Player = require('../models/player')
 const mongoose = require('mongoose')
+const alert = require('alert')
 
 // Index route redirects to homepage
 router.get('/', async (req, res) => {
@@ -36,7 +37,7 @@ router.post('/', async (req, res) => {
     })
     //try {
         const newGame = await game.save()
-        res.redirect(`game/${newGame.name}`)
+        res.redirect(`game/${newGame._id}`)
     /*} catch {
         res.redirect('/')
         console.error('Error creating Game')
@@ -52,7 +53,7 @@ router.get('/teapot', (req, res) => {
 // Joined Game Route
 router.get('/:id', async (req, res) => {
     const game = await Game.findById(req.params.id)
-    let txt = `${req.params.id} <br>`
+    let txt = `${game.name} <br>`
     txt += `Player 1: ${game.player1} <br>`
     txt += `Player 2: ${game.player2} <br>`
     txt += `Player 3: ${game.player3} <br>`
