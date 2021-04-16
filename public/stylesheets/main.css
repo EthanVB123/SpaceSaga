@@ -43,3 +43,6 @@ a.button {
 a.button:hover {
     background-color: #aaa;
 }
+.scroll {
+    overflow: scroll;
+}
