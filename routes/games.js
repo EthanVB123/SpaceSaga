@@ -84,15 +84,30 @@ router.put('/:id', async (req, res) => {
         } else {
             game.player1 = game.player1
             if (game.player2 == undefined) {
+                if (req.body.playerselect == game.player1) {
+                    alert('This player is already playing this game.')
+                    res.redirect('/')
+                } else {
                 game.player2 = req.body.playerselect
+                }
             } else {
                 game.player2 = game.player2
                 if (game.player3 == undefined) {
+                    if (req.body.playerselect == game.player1 || req.body.playerselect == game.player2) {
+                        alert('This player is already playing this game.')
+                        res.redirect('/')
+                    } else {
                     game.player3 == req.body.playerselect
+                    }
                 } else {
                     game.player3 = game.player3
                     if (game.player4 == undefined) {
-                        game.player4 = req.body.playerselect
+                        if (req.body.playerselect == game.player1 || req.body.playerselect == game.player2 || req.body.playerselect == game.player3) {
+                            alert('This player is already playing this game.')
+                            res.redirect('/')
+                        } else {
+                            game.player4 = req.body.playerselect
+                        }
                     } else {
                         game.player4 = game.player4
                     }
