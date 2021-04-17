@@ -164,4 +164,46 @@ router.put('/:id', async (req, res) => {
     } */
 })
 
+// Remove player from game
+router.put('/:id/remove', async (req, res) => {
+    let game
+    let player
+    try {
+        game = await Game.findById(req.params.id)
+        player = await Player.findById(req.body.player)
+        if (req.body.player == game.player1) {
+            game.player1 = game.player2
+            game.player2 = game.player3
+            game.player3 = game.player4
+            game.player4 = undefined
+            player.game = undefined
+        } else if (req.body.player == game.player2) {
+            game.player1 = game.player1
+            game.player2 = game.player3
+            game.player3 = game.player4
+            game.player4 = undefined
+            player.game = undefined
+        } else if (req.body.player == game.player3) {
+            game.player1 = game.player1
+            game.player2 = game.player2
+            game.player3 = game.player4
+            game.player4 = undefined
+            player.game = undefined
+        } else if (req.body.player == game.player4) {
+            game.player1 = game.player1
+            game.player2 = game.player2
+            game.player3 = game.player3
+            game.player4 = undefined
+            player.game = undefined
+        } else {
+            alert('This player is not in the game')
+            res.redirect('/')
+        }
+        await game.save()
+        await player.save()
+    } catch {
+        console.log('Error - games.js line 205')
+        res.redirect('/')
+    }
+})
 module.exports = router

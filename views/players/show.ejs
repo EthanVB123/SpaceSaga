@@ -1,0 +1,17 @@
+<h2>All Players</h2>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Game</th>
+        <th>Delete</th>
+    </tr>
+    <% players.forEach(element => {%>
+        <tr>
+            <td><%= element.name %> </td>
+            <td><%= element.game %> </td>
+            <td><form method='POST' action='/setup/<%= element.id %>?_method=DELETE'>
+                <button type="submit">Delete</button>
+            </form></td>
+        </tr>
+    <% }) %>  
+</table>
