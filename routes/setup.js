@@ -11,6 +11,9 @@ router.get('/', async (req, res) => {
         players.forEach(element => {
             allPlayerNames += element.name
             allPlayerNames += ' '
+            allPlayerNames += element.game
+            allPlayerNames += '<br>'
+            
         });
         res.send(allPlayerNames)
     //} catch {

@@ -4,6 +4,7 @@ const Game = require('../models/game')
 const Player = require('../models/player')
 const mongoose = require('mongoose')
 const alert = require('alert')
+const player = require('../models/player')
 
 // Index route redirects to homepage
 router.get('/', async (req, res) => {
@@ -101,12 +102,15 @@ router.get('/:id/edit', async (req, res) => {
 })
 router.put('/:id', async (req, res) => {
     let game
+    let player
     //try {
         game = await Game.findById(req.params.id)
+        player = await Player.findById(req.body.playerselect)
         game.name = game.name
         game.password = game.password
         if (game.player1 == undefined) {
             game.player1 = req.body.playerselect
+            player.game = req.params.id
         } else {
             game.player1 = game.player1
             if (game.player2 == undefined) {
@@ -115,6 +119,7 @@ router.put('/:id', async (req, res) => {
                     res.redirect('/')
                 } else {
                 game.player2 = req.body.playerselect
+                player.game = req.params.id
                 }
             } else {
                 game.player2 = game.player2
@@ -124,6 +129,7 @@ router.put('/:id', async (req, res) => {
                         res.redirect('/')
                     } else {
                     game.player3 == req.body.playerselect
+                    player.game = req.params.id
                     }
                 } else {
                     game.player3 = game.player3
@@ -133,6 +139,7 @@ router.put('/:id', async (req, res) => {
                             res.redirect('/')
                         } else {
                             game.player4 = req.body.playerselect
+                            player.game = req.params.id
                         }
                     } else {
                         game.player4 = game.player4
@@ -142,6 +149,7 @@ router.put('/:id', async (req, res) => {
         }
     
         await game.save()
+        await player.save()
         res.redirect(`${game.id}`) 
     /*} catch {
         if (game == null) {
