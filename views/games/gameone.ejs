@@ -1,0 +1,13 @@
+<h3>View Game</h3>
+<h6><%= game.name %> </h6>
+<table>
+    <tr>
+        <td>Player 1</td>
+        <td><%= game.player1 %> </td>
+        <td>
+            <form method='POST' action='/game/<%= element.id %>?_method=PUT'>
+            <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+</table>
