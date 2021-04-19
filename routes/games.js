@@ -45,27 +45,26 @@ router.post('/', async (req, res) => {
     }*/
 })
 
-
-// I'm a teapot
-router.get('/teapot', (req, res) => {
-    res.sendStatus(418)
-})
-
 // Joined Game Route
 router.get('/:id', async (req, res) => {
     const game = await Game.findById(req.params.id)
-    let txt = `${game.name} <br>`
+    const player1 = game.player1
+    const player2 = game.player2
+    const player3 = game.player3
+    const player4 = game.player4
+    /*let txt = `${game.name} <br>`
     txt += `Player 1: ${game.player1} <br>`
     txt += `Player 2: ${game.player2} <br>`
     txt += `Player 3: ${game.player3} <br>`
     txt += `Player 4: ${game.player4} <br>`
     txt += `Game: ${game}` // for testing only
-    res.send(txt)
+    res.send(txt)*/
+    res.render('games/gameone', {game: game, player1: player1, player2: player2, player3: player3, player4: player4})
 })
 
 // Edit Game Route - mainly used to add a player to the game
 
-// Add Player Route
+// Add Player Route - first two are for the password, second two are for adding the player
 router.get('/:id/password', async (req, res) => {
     try {   
         const game = await Game.findById(req.params.id)
@@ -165,31 +164,41 @@ router.put('/:id', async (req, res) => {
 })
 
 // Remove player from game
-router.put('/:id/remove', async (req, res) => {
+router.put('/:id/:n/remove', async (req, res) => { // n is an int from 1-4 inclusive - it is the player to discard
     let game
     let player
     try {
         game = await Game.findById(req.params.id)
-        player = await Player.findById(req.body.player)
-        if (req.body.player == game.player1) {
+        if (req.params.n == 1) {
+            player = await Player.findById(game.player1)
+        } else if (req.params.n == 2) {
+            player = await Player.findById(game.player2)
+        } else if (req.params.n == 3) {
+            player = await Player.findById(game.player3)
+        } else if (req.params.n == 4) {
+            player = await Player.findById(game.player4)
+        }
+
+
+        if (req.params.n == 1) {
             game.player1 = game.player2
             game.player2 = game.player3
             game.player3 = game.player4
             game.player4 = undefined
             player.game = undefined
-        } else if (req.body.player == game.player2) {
+        } else if (req.params.n == 2) {
             game.player1 = game.player1
             game.player2 = game.player3
             game.player3 = game.player4
             game.player4 = undefined
             player.game = undefined
-        } else if (req.body.player == game.player3) {
+        } else if (req.params.n == 3) {
             game.player1 = game.player1
             game.player2 = game.player2
             game.player3 = game.player4
             game.player4 = undefined
             player.game = undefined
-        } else if (req.body.player == game.player4) {
+        } else if (req.params.n == 4) {
             game.player1 = game.player1
             game.player2 = game.player2
             game.player3 = game.player3

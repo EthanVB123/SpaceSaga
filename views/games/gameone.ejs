@@ -5,9 +5,36 @@
         <td>Player 1</td>
         <td><%= game.player1 %> </td>
         <td>
-            <form method='POST' action='/game/<%= element.id %>?_method=PUT'>
+            <form method='POST' action='/game/<%= game.id %>/1/remove?_method=PUT'>
+            <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    <tr>
+        <td>Player 2</td>
+        <td><%= game.player2 %> </td>
+        <td>
+            <form method='POST' action='/game/<%= game.id %>/2/remove?_method=PUT'>
+            <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+        <td>Player 3</td>
+        <td><%= game.player3 %> </td>
+        <td>
+            <form method='POST' action='/game/<%= game.id %>/3/remove?_method=PUT'>
+            <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    <tr>
+        <td>Player 4</td>
+        <td><%= game.player4 %> </td>
+        <td>
+            <form method='POST' action='/game/<%= game.id %>/4/remove?_method=PUT'>
             <button type="submit">Delete</button>
             </form>
         </td>
     </tr>
 </table>
+<%# Delete game here %> 
