@@ -7,8 +7,7 @@ const playerSchema = new mongoose.Schema({
         required: true
     },
     game: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true
+        type: mongoose.Schema.Types.ObjectId
     }
 
 })

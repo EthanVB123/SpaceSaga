@@ -167,7 +167,7 @@ router.put('/:id', async (req, res) => {
 router.put('/:id/:n/remove', async (req, res) => { // n is an int from 1-4 inclusive - it is the player to discard
     let game
     let player
-    try {
+    //try {
         game = await Game.findById(req.params.id)
         if (req.params.n == 1) {
             player = await Player.findById(game.player1)
@@ -185,34 +185,64 @@ router.put('/:id/:n/remove', async (req, res) => { // n is an int from 1-4 inclu
             game.player2 = game.player3
             game.player3 = game.player4
             game.player4 = undefined
+            if (player != undefined && player != null) {
             player.game = undefined
+            }
         } else if (req.params.n == 2) {
             game.player1 = game.player1
             game.player2 = game.player3
             game.player3 = game.player4
             game.player4 = undefined
-            player.game = undefined
+            if (player != undefined && player != null) {
+                player.game = undefined
+            }
         } else if (req.params.n == 3) {
             game.player1 = game.player1
             game.player2 = game.player2
             game.player3 = game.player4
             game.player4 = undefined
-            player.game = undefined
+            if (player != undefined && player != null) {
+                player.game = undefined
+            }
         } else if (req.params.n == 4) {
             game.player1 = game.player1
             game.player2 = game.player2
             game.player3 = game.player3
             game.player4 = undefined
-            player.game = undefined
+            if (player != undefined && player != null) {
+                player.game = undefined
+            }
         } else {
             alert('This player is not in the game')
             res.redirect('/')
         }
         await game.save()
-        await player.save()
-    } catch {
-        console.log('Error - games.js line 205')
+        if (player != undefined && player != null) {
+            await player.save()
+        }
+        res.redirect(`/game/${game.id}`)
+            /*} catch {
+        console.log('Error - games.js line 214')
         res.redirect('/')
+    }*/
+})
+router.delete('/:id', async (req, res) => {
+    let game
+    try {
+        game = await Game.findById(req.params.id)
+        if (game.numberPlayers == 0) {
+            await game.remove()
+            res.redirect(`/`)
+        } else {
+            alert("You have some players remaining... You can't delete a game if there are still players in it.")
+            res.redirect(`/game/${game.id}`)
+        }
+    } catch {
+        if (game == null) {
+            res.redirect('/')
+        } else {
+        res.redirect(`/game/${game.id}`)
+        }
     }
 })
 module.exports = router

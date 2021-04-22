@@ -10,6 +10,11 @@ button {
     font-family: "Consolas", Arial;
     transition-duration: 2000ms;
 }
+.warningbtn {
+    font-size: 1.4em;
+    padding: 12px;
+    background-color: #f00;
+}
 .majorbtn {
     left: 50%;
     /*padding: 0.7em 20vw;*/

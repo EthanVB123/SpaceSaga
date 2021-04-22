@@ -1,5 +1,5 @@
 <h3>View Game</h3>
-<h6><%= game.name %> </h6>
+<h4><%= game.name %> </h4>
 <table>
     <tr>
         <td>Player 1</td>
@@ -37,4 +37,7 @@
         </td>
     </tr>
 </table>
+<form method='POST' action='/game/<%= game.id %>?_method=DELETE'>
+    <button type="submit" class="warningbtn">Delete Game</button>
+</form>
 <%# Delete game here %> 
