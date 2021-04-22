@@ -24,28 +24,11 @@ router.post('/', async (req, res) => {
     })
     //try {
         const newPlayer = await player.save()
-        res.redirect(`setup/${newPlayer.name}`)
+        res.redirect(`setup`)
     /*} catch {
         res.redirect('/')
         console.error('Error creating Player')
     }*/
-})
-
-
-// I'm a teapot
-router.get('/teapot', (req, res) => {
-    res.sendStatus(418)
-})
-
-// Joined Game Route
-router.get('/:id', async(req, res) => {
-    try {
-    const player = await Player.findById(req.params.id)
-    let txt = `Name: ${player.name}<br>Game: ${player.game}<br>ID: ${player._id}`
-    res.send(`${req.params.id}'s Game`)
-    } catch {
-        res.send('Player does not exist, or an error has occurred.')
-    }
 })
 
 // Delete Player Route
@@ -54,10 +37,11 @@ router.delete('/:id', async (req, res) => {
     try {
         player = await Player.findById(req.params.id)
         if (player.game == undefined || player.game == null) {await player.remove()}
-        else {alert("You can't delete someone who is in a game!")}        
+        else {alert("You can't delete someone who is in a game.")}        
         res.redirect(`/setup`)
     } catch {
         if (player == null) {
+            alert("You can't delete someone who does not exist.")
             res.redirect('/')
         } else {
         res.redirect(`/setup/${player.id}`)

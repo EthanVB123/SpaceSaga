@@ -15,5 +15,9 @@ router.get('/credits', (req, res) => {
     alert('Created by Ethan van Bruchem, in 2021 \n Thanks for playing!')
     res.redirect('/')
 })
+// I'm a teapot
+router.get('/teapot', (req, res) => {
+    res.sendStatus(418)
+})
 
 module.exports = router
