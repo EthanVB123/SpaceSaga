@@ -29,6 +29,11 @@ const gameSchema = new mongoose.Schema({
     player4: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Player' 
+    },
+    hasStarted: {
+        type: Boolean,
+        required: true,
+        default: false
     }
 
 })

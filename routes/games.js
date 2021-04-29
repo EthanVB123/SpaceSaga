@@ -235,10 +235,10 @@ router.get('/:id/start', async (req, res) => {
         res.render('games/start', {game: game}) // not created yet...
     } else {
         alert(`This game only has ${game.numberPlayers} player(s); it needs 4 players to start.`) // code so that unique message if player singular or players plural?
-        res.redirect(`/${req.params.id}`)
+        res.redirect(`/game/${req.params.id}`)
     }
     } catch {
-        res.redirect(`/${req.params.id}`)
+        res.redirect(`/game/${req.params.id}`)
         console.log('Error starting game')
     }
 
