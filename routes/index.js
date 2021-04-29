@@ -19,5 +19,22 @@ router.get('/credits', (req, res) => {
 router.get('/teapot', (req, res) => {
     res.sendStatus(418)
 })
+router.get('/clock', (req, res) => {
+    var time = 0
+    while (time < 100) {
+    renderClock(time, res)
+    msleep(1000)
+    time += 1
+    }
+    
+})
+async function renderClock(time, res) {
+    time += 1
+    console.log(time)
+    await res.render('clock/clock', {time: time})
+}
+function msleep(n) {
+    Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, n);
+  }
 
 module.exports = router

@@ -127,7 +127,7 @@ router.put('/:id', async (req, res) => {
                         alert('This player is already playing this game.')
                         res.redirect('/')
                     } else {
-                    game.player3 == req.body.playerselect
+                    game.player3 = req.body.playerselect
                     player.game = req.params.id
                     }
                 } else {
@@ -226,6 +226,25 @@ router.put('/:id/:n/remove', async (req, res) => { // n is an int from 1-4 inclu
         res.redirect('/')
     }*/
 })
+
+// Start Game
+router.get('/:id/start', async (req, res) => {
+    try {
+    const game = await Game.findById(req.params.id)
+    if (game.numberPlayers == 4) {
+        res.render('games/start', {game: game}) // not created yet...
+    } else {
+        alert(`This game only has ${game.numberPlayers} player(s); it needs 4 players to start.`) // code so that unique message if player singular or players plural?
+        res.redirect(`/${req.params.id}`)
+    }
+    } catch {
+        res.redirect(`/${req.params.id}`)
+        console.log('Error starting game')
+    }
+
+})
+
+// Delete game - only if no players remain
 router.delete('/:id', async (req, res) => {
     let game
     try {

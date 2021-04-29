@@ -6,9 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Space Saga</title>
     <link rel='stylesheet' href='/stylesheets/main.css'>
+    <script>
+        getTime()
+        function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+        }
+        async function getTime() {
+            var now = new Date()
+            var timetext = document.getElementById('time')
+            console.log('run')
+            timetext.innerText = `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`
+            await sleep(500)
+            getTime()
+        }
+    </script>
 </head>
-<body> 
-    Header
+<body onload='getTime()'>
+    <p>Dev Settings: 
+    <a href='/'>Main Menu</a>
+    <a href='/setup'>All Players</a>
+    <span id='time'>Text</span>
+    </p>
     <br>
     <%- body %> 
     <br>
