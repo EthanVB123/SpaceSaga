@@ -1,0 +1,16 @@
+<h2>Resume Game</h2>
+<form action='/game/resume' method='POST'>
+    <div>
+    <label>Username</label>
+    <select name='playerselect'>
+        <% players.forEach(player => { %>
+            <option label='<%= player.name %>' value='<%= player.id %>'></option> 
+        <% }) %> 
+    </select>
+    <label>Password</label>
+    <input type="password" name="password">
+    </div>
+
+    <a class='button' href='/'>Cancel Game</a>
+    <button type="submit" class='button'>Join Game</button>
+</form>

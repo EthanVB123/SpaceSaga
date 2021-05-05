@@ -250,6 +250,11 @@ router.put('/:id/start', async (req, res) => {
         alert('Error with updating the game.')
     }
 })
+
+// Resume Game is coming below
+router.get('/resume', (req, res) => {
+    res.render('/games/resume', {players: players}) // not functional... requires a post here and ejs tidyup
+})
 // Delete game - only if no players remain
 router.delete('/:id', async (req, res) => {
     let game
