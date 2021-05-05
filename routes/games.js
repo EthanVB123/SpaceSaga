@@ -36,13 +36,13 @@ router.post('/', async (req, res) => {
         name: req.body.name,
         password: req.body.password
     })
-    //try {
+    try {
         const newGame = await game.save()
         res.redirect(`game/${newGame._id}`)
-    /*} catch {
+    } catch {
         res.redirect('/')
         console.error('Error creating Game')
-    }*/
+    }
 })
 
 // Joined Game Route
@@ -52,13 +52,6 @@ router.get('/:id', async (req, res) => {
     const player2 = game.player2
     const player3 = game.player3
     const player4 = game.player4
-    /*let txt = `${game.name} <br>`
-    txt += `Player 1: ${game.player1} <br>`
-    txt += `Player 2: ${game.player2} <br>`
-    txt += `Player 3: ${game.player3} <br>`
-    txt += `Player 4: ${game.player4} <br>`
-    txt += `Game: ${game}` // for testing only
-    res.send(txt)*/
     if (game.hasStarted == false) {
     res.render('games/gameone', {game: game, player1: player1, player2: player2, player3: player3, player4: player4})
     } else {
@@ -109,6 +102,7 @@ router.put('/:id', async (req, res) => {
     //try {
         game = await Game.findById(req.params.id)
         player = await Player.findById(req.body.playerselect)
+        if (player.game == undefined || player.game == null) {
         game.name = game.name
         game.password = game.password
         if (game.player1 == undefined) {
@@ -154,6 +148,9 @@ router.put('/:id', async (req, res) => {
         await game.save()
         await player.save()
         res.redirect(`${game.id}`) 
+    } else {
+        alert(`This player is already in a game!`)
+    }
     /*} catch {
         if (game == null) {
             res.redirect('/')
@@ -231,31 +228,19 @@ router.put('/:id/:n/remove', async (req, res) => { // n is an int from 1-4 inclu
     }*/
 })
 
-// Game has started screen
-router.get('/:id/start', async (req, res) => {
-    try {
-    const game = await Game.findById(req.params.id)
-    if (game.numberPlayers == 4) {
-        res.render('games/start', {game: game}) // not created yet...
-    } else {
-        alert(`This game only has ${game.numberPlayers} player(s); it needs 4 players to start.`) // code so that unique message if player singular or players plural?
-        res.redirect(`/game/${req.params.id}`)
-    }
-    } catch {
-        res.redirect(`/game/${req.params.id}`)
-        console.log('Error starting game')
-    }
-
-})
 // Update game so that it has now started
 router.put('/:id/start', async (req, res) => {
     let game
     try {
         game = await Game.findById(req.params.id)
         if (game.numberPlayers == 4) {
+            if (game.hasStarted == true) {
+                game.hasStarted = false
+            } else {
             game.hasStarted = true
+            }
             await game.save()
-            // redirect to id page, when fully fixed...
+            res.redirect(`/game/${req.params.id}`)
         } else {
             res.redirect(`/game/${req.params.id}`)
             alert(`This game only has ${game.numberPlayers} player(s); it needs 4 players to start.`) // code so that unique message if player singular or players plural?

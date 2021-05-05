@@ -2,3 +2,6 @@
 <h3>The actual game is being created in 2022 as my Year 12 project. Thanks for viewing the demo of my lobby! ☺</h3>
 <p><%= game.name %> </p>
 <p><%= game.player1 %></p><p><%= game.player2 %></p><p><%= game.player3 %></p><p><%= game.player4 %></p>
+<form method='POST' action='/game/<%= game.id %>/start?_method=PUT'>
+    <button type="submit" class="warningbtn">Terminate Game</button>
+</form>
