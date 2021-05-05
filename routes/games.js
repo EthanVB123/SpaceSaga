@@ -59,7 +59,11 @@ router.get('/:id', async (req, res) => {
     txt += `Player 4: ${game.player4} <br>`
     txt += `Game: ${game}` // for testing only
     res.send(txt)*/
+    if (game.hasStarted == false) {
     res.render('games/gameone', {game: game, player1: player1, player2: player2, player3: player3, player4: player4})
+    } else {
+    res.render('games/start', {game: game})
+    }
 })
 
 // Edit Game Route - mainly used to add a player to the game
@@ -227,7 +231,7 @@ router.put('/:id/:n/remove', async (req, res) => { // n is an int from 1-4 inclu
     }*/
 })
 
-// Start Game
+// Game has started screen
 router.get('/:id/start', async (req, res) => {
     try {
     const game = await Game.findById(req.params.id)
@@ -243,7 +247,24 @@ router.get('/:id/start', async (req, res) => {
     }
 
 })
-
+// Update game so that it has now started
+router.put('/:id/start', async (req, res) => {
+    let game
+    try {
+        game = await Game.findById(req.params.id)
+        if (game.numberPlayers == 4) {
+            game.hasStarted = true
+            await game.save()
+            // redirect to id page, when fully fixed...
+        } else {
+            res.redirect(`/game/${req.params.id}`)
+            alert(`This game only has ${game.numberPlayers} player(s); it needs 4 players to start.`) // code so that unique message if player singular or players plural?
+        }
+    } catch {
+        res.redirect(`/game/${req.params.id}`)
+        alert('Error with updating the game.')
+    }
+})
 // Delete game - only if no players remain
 router.delete('/:id', async (req, res) => {
     let game

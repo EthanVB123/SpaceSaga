@@ -40,4 +40,6 @@
 <form method='POST' action='/game/<%= game.id %>?_method=DELETE'>
     <button type="submit" class="warningbtn">Delete Game</button>
 </form>
-<a href='/game/<%= game.id %>/start' class='button submitbtn' style='position: absolute;left:11vw;top:54vh;'>START GAME</a>
+<form method='POST' action='/game/<%= game.id %>/start?_method=PUT'>
+    <button type="submit" class="submitbtn">Start Game</button>
+</form>
