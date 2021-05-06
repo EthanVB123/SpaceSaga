@@ -3,7 +3,7 @@
 <table>
     <tr>
         <td>Player 1</td>
-        <td><%= game.player1 %> </td>
+        <% if (player1 != null) { %> <td> <%= player1.name %> </td> <% } else { %> <td>None</td> <% } %> 
         <td>
             <form method='POST' action='/game/<%= game.id %>/1/remove?_method=PUT'>
             <button type="submit">Delete</button>
@@ -12,7 +12,7 @@
     </tr>
     <tr>
         <td>Player 2</td>
-        <td><%= game.player2 %> </td>
+        <% if (player2 != null) { %> <td> <%= player2.name %> </td> <% } else { %> <td>None</td> <% } %>
         <td>
             <form method='POST' action='/game/<%= game.id %>/2/remove?_method=PUT'>
             <button type="submit">Delete</button>
@@ -20,7 +20,7 @@
         </td>
     </tr>
         <td>Player 3</td>
-        <td><%= game.player3 %> </td>
+        <% if (player3 != null) { %> <td> <%= player3.name %> </td> <% } else { %> <td>None</td> <% } %>
         <td>
             <form method='POST' action='/game/<%= game.id %>/3/remove?_method=PUT'>
             <button type="submit">Delete</button>
@@ -29,7 +29,7 @@
     </tr>
     <tr>
         <td>Player 4</td>
-        <td><%= game.player4 %> </td>
+        <% if (player4 != null) { %> <td> <%= player4.name %> </td> <% } else { %> <td>None</td> <% } %> 
         <td>
             <form method='POST' action='/game/<%= game.id %>/4/remove?_method=PUT'>
             <button type="submit">Delete</button>

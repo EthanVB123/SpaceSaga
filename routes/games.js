@@ -45,13 +45,42 @@ router.post('/', async (req, res) => {
     }
 })
 
+// Resume Game is coming below - now fully operational!
+router.get('/resume', async (req, res) => {
+    players = await Player.find({})
+    res.render('games/resume', {players: players}) 
+})
+router.post('/resume/check', async (req, res) => {
+    let game
+    let player
+    //try {
+    console.log(req.body.player)
+    player = await Player.findById(req.body.player)
+    if (player.game != undefined && player.game != null) {
+    game = await Game.findById(player.game)
+    
+    if (req.body.password == game.password) {
+        res.redirect(`/game/${game._id}`)
+    } else {
+        alert('User and password do not match')
+        res.redirect('/')
+    }} else {
+        alert('User is not in a game')
+        res.redirect('/')
+    }
+    /*} catch {
+        console.error('Error resume game')
+        res.redirect('/')
+    }*/ 
+})
+
 // Joined Game Route
 router.get('/:id', async (req, res) => {
     const game = await Game.findById(req.params.id)
-    const player1 = game.player1
-    const player2 = game.player2
-    const player3 = game.player3
-    const player4 = game.player4
+    const player1 = await Player.findById(game.player1)
+    const player2 = await Player.findById(game.player2)
+    const player3 = await Player.findById(game.player3)
+    const player4 = await Player.findById(game.player4)
     if (game.hasStarted == false) {
     res.render('games/gameone', {game: game, player1: player1, player2: player2, player3: player3, player4: player4})
     } else {
@@ -254,6 +283,16 @@ router.put('/:id/start', async (req, res) => {
 // Resume Game is coming below
 router.get('/resume', (req, res) => {
     res.render('/games/resume', {players: players}) // not functional... requires a post here and ejs tidyup
+})
+router.get('/resume/check', async (req, res) => {
+    const player = await Player.findById(req.body.playerselect)
+    const game = await Game.findById(player.game)
+    if (req.body.password == game.password) {
+        res.redirect(`/game/${game._id}`)
+    } else {
+        alert('User and password do not match')
+        res.redirect('/')
+    }
 })
 // Delete game - only if no players remain
 router.delete('/:id', async (req, res) => {
