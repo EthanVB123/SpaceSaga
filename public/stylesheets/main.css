@@ -1,6 +1,10 @@
 * {
     background-color: #e4dfda80;
     font-family: "Consolas"; /* download something sufficiently spacey later */
+    color: white;
+}
+body {
+    background-image: url('/views/assets/spacebackground.jpg');
 }
 button {
     align-self: center;
