@@ -72,6 +72,9 @@ a.button {
     font-family: 'Xolonium', Consolas;
     transition-duration: 500ms;
     background-color: #10109060;
+    width: 180px;
+    text-align:center;
+    border-radius: 6px;
 }
 a.button:hover {
     background-color: #00aa;
