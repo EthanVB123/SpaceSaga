@@ -15,6 +15,14 @@ body {
 }
 form {
     color: white;
+    position: fixed;
+    left: 40vw;
+    top: 30vh;
+}
+form>* {
+    width: 20vw;
+    text-align:center;
+    margin-top: 1vh;
 }
 form input {
     color: navy;
@@ -26,21 +34,20 @@ div {
 button {
     align-self: center;
     font-size: 1em;
-    padding: 8px;
+    padding: 4px;
     text-align: center;
     font-family: "Xolonium", "Consolas", Arial;
     transition-duration: 500ms;
     background-color: #10109060;
+    border-radius: 6px;
 }
 .warningbtn {
     font-size: 1.4em;
-    padding: 12px;
-    background-color: #f00;
+    padding: 8px;
 }
 .submitbtn {
     font-size: 1.4em;
     padding: 12px;
-    background-color: green;
 }
 .majorbtn {
     left: 50%;
