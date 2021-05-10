@@ -1,5 +1,5 @@
-<h2>All Players</h2>
-<table>
+<h2 style='width: 99vw; text-align: center;'>All Players</h2>
+<table style='position: fixed; left: 30vw; width: 40vw;'>
     <tr>
         <th>Name</th>
         <th>Game</th>
@@ -8,9 +8,9 @@
     <% players.forEach(element => {%>
         <tr>
             <td><%= element.name %> </td>
-            <td><%= element.game %> </td>
-            <td><form method='POST' action='/setup/<%= element.id %>?_method=DELETE'>
-                <button type="submit">Delete</button>
+            <td class='align'><%= element.game %> </td>
+            <td style='width: auto;'><form class='inline' method='POST' action='/setup/<%= element.id %>?_method=DELETE'>
+                <button type="submit" class='inline' style='width: 5.3vw;'>Delete</button>
             </form></td>
         </tr>
     <% }) %>  

@@ -71,9 +71,9 @@ button:hover {
     text-align: center;
     font-size: 5em;
 }
-table, th, td {
-    border: 1px solid white;
-}
+/*table, th, td {
+    border: 1px solid white; For testing purposes only
+}*/
 th, td {
     padding: 10px;
 }

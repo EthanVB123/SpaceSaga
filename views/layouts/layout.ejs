@@ -15,7 +15,19 @@
             var now = new Date()
             var timetext = document.getElementById('time')
             console.log('run')
-            timetext.innerText = `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`
+            var hours = now.getHours()
+            if (hours < 10) {
+                hours = '0' + hours
+            }
+            var mins = now.getMinutes()
+            if (mins < 10) {
+                mins = '0' + mins
+            }
+            var secs = now.getSeconds()
+            if (secs < 10) {
+                secs = '0' + secs
+            }
+            timetext.innerText = `${hours}:${mins}:${secs}`
             await sleep(500)
             getTime()
         }

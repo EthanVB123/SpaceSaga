@@ -1,7 +1,10 @@
-<h1>This game has started.</h1>
-<h3>The actual game is being created in 2022 as my Year 12 project. Thanks for viewing the demo of my lobby! ☺</h3>
-<p><%= game.name %> </p>
-<p><%= game.player1 %></p><p><%= game.player2 %></p><p><%= game.player3 %></p><p><%= game.player4 %></p>
+<h1 class='align'>This game has started.</h1>
+<h3 class='align'>The actual game is being created in 2022 as my Year 12 project. Thanks for viewing the demo of my lobby! ☺</h3>
+<div class='align'>Game Name: <%= game.name %></div>
+<div class='align'>Player 1: <%= player1.name %></div>
+<div class='align'>Player 2: <%= player2.name %></div>
+<div class='align'>Player 3: <%= player3.name %></div>
+<div class='align'>Player 4: <%= player4.name %></div>
 <form method='POST' action='/game/<%= game.id %>/start?_method=PUT'>
-    <button type="submit" class="warningbtn">Terminate Game</button>
+    <button type="submit" class="warningbtn" style='margin-top: 10vh;'>Terminate Game</button>
 </form>

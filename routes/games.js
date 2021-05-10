@@ -84,11 +84,9 @@ router.get('/:id', async (req, res) => {
     if (game.hasStarted == false) {
     res.render('games/gameone', {game: game, player1: player1, player2: player2, player3: player3, player4: player4})
     } else {
-    res.render('games/start', {game: game})
+    res.render('games/start', {game: game, player1: player1, player2: player2, player3: player3, player4: player4})
     }
 })
-
-// Edit Game Route - mainly used to add a player to the game
 
 // Add Player Route - first two are for the password, second two are for adding the player
 router.get('/:id/password', async (req, res) => {
