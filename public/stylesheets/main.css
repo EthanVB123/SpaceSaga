@@ -7,14 +7,21 @@
     font-family: "Xolonium", "Consolas"; /* download something sufficiently spacey later */
     color: white;
 }
+.align {
+    width:100vw;
+    text-align:center;
+}
 html {
     background-image: url('/spacebackground.jpg');
 }
 body {
     color: white;
 }
-form {
-    color: white;
+.black {
+    color: black;
+}
+
+form:not(.inline) {
     position: fixed;
     left: 40vw;
     top: 30vh;
@@ -24,6 +31,9 @@ form>* {
     text-align:center;
     margin-top: 1vh;
 }
+form.inline {
+    width:auto;
+}
 form input {
     color: navy;
 }
@@ -32,7 +42,6 @@ div {
     font-family: "Xolonium", "Consolas";
 }
 button {
-    align-self: center;
     font-size: 1em;
     padding: 4px;
     text-align: center;
@@ -63,7 +72,7 @@ button:hover {
     font-size: 5em;
 }
 table, th, td {
-    border: 1px solid black;
+    border: 1px solid white;
 }
 th, td {
     padding: 10px;

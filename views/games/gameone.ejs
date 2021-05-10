@@ -1,12 +1,12 @@
-<h3>View Game</h3>
-<h4><%= game.name %> - Started: <%= game.hasStarted %> </h4>
-<table>
+<h3 style="width:100vw;text-align:center;">View Game</h3>
+<h4 style='width:100vw;text-align: center;'><%= game.name %> - Started: <%= game.hasStarted %> </h4>
+<table style='width:20vw;position:absolute;left:40vw;'>
     <tr>
         <td>Player 1</td>
         <% if (player1 != null) { %> <td> <%= player1.name %> </td> <% } else { %> <td>None</td> <% } %> 
-        <td>
-            <form method='POST' action='/game/<%= game.id %>/1/remove?_method=PUT'>
-            <button type="submit">Delete</button>
+        <td style='width:5vw;'>
+            <form style='width:5vw;'class='inline' method='POST' action='/game/<%= game.id %>/1/remove?_method=PUT'>
+            <button style='width:5vw;'type="submit">Delete</button>
             </form>
         </td>
     </tr>
@@ -14,16 +14,16 @@
         <td>Player 2</td>
         <% if (player2 != null) { %> <td> <%= player2.name %> </td> <% } else { %> <td>None</td> <% } %>
         <td>
-            <form method='POST' action='/game/<%= game.id %>/2/remove?_method=PUT'>
-            <button type="submit">Delete</button>
+            <form class='inline' method='POST' action='/game/<%= game.id %>/2/remove?_method=PUT'>
+            <button style='width:5vw;'type="submit">Delete</button>
             </form>
         </td>
     </tr>
         <td>Player 3</td>
         <% if (player3 != null) { %> <td> <%= player3.name %> </td> <% } else { %> <td>None</td> <% } %>
         <td>
-            <form method='POST' action='/game/<%= game.id %>/3/remove?_method=PUT'>
-            <button type="submit">Delete</button>
+            <form class='inline' method='POST' action='/game/<%= game.id %>/3/remove?_method=PUT'>
+            <button style='width:5vw;'type="submit">Delete</button>
             </form>
         </td>
     </tr>
@@ -31,15 +31,15 @@
         <td>Player 4</td>
         <% if (player4 != null) { %> <td> <%= player4.name %> </td> <% } else { %> <td>None</td> <% } %> 
         <td>
-            <form method='POST' action='/game/<%= game.id %>/4/remove?_method=PUT'>
-            <button type="submit">Delete</button>
+            <form class='inline' method='POST' action='/game/<%= game.id %>/4/remove?_method=PUT'>
+            <button style='width:5vw;' type="submit">Delete</button>
             </form>
         </td>
     </tr>
 </table>
-<form method='POST' action='/game/<%= game.id %>?_method=DELETE'>
+<form class='inline' style='position:fixed;left:40vw;top:60vh;width:20vw;' method='POST' action='/game/<%= game.id %>?_method=DELETE'>
     <button type="submit" class="warningbtn">Delete Game</button>
 </form>
-<form method='POST' action='/game/<%= game.id %>/start?_method=PUT'>
+<form class='inline' style='position:fixed;left:40vw;top:68vh;width:20vw;' method='POST' action='/game/<%= game.id %>/start?_method=PUT'>
     <button type="submit" class="submitbtn">Start Game</button>
 </form>

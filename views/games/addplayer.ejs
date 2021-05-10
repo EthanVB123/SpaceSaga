@@ -1,14 +1,16 @@
-<h2>Join Game</h2>
+<h2 class='align'>Join Game</h2>
 <form action='/game/<%= game.id %>?_method=PUT' method='POST'>
     <div>
     <label>Add Player</label>
-    <select name='playerselect'>
+    </div>
+    <div style='margin-bottom:3vh;'>
+    <select class='black' name='playerselect'>
         <% players.forEach(player => { %>
-            <option label='<%= player.name %>' value='<%= player.id %>'></option> 
+            <option class='black' label='<%= player.name %>' value='<%= player.id %>'></option> 
         <% }) %> 
     </select>
     </div>
 
-    <a class='button' href='/'>Cancel Game</a>
-    <button type="submit" class='button'>Join Game</button>
+    <div style='margin-bottom:3vh;'><a class='button submitbtn' href='/'>Cancel Game</a></div>
+    <div><button type="submit" class='button submitbtn'>Join Game</button></div>
 </form>
