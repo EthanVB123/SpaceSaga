@@ -5,12 +5,13 @@ const Player = require('../models/player')
 const alert = require('alert')
 // Index route has list of players
 router.get('/', async (req, res) => {
+    try {
     players = await Player.find({})
     res.render('players/show', {players: players})
-    //} catch {
-        //res.redirect('/')
-        //console.error('Error with index route')        
-    //} 
+    } catch {
+        alert('Error rendering list of players')
+        res.redirect('/')       
+    } 
 })
 
 // New Player Route
@@ -22,13 +23,13 @@ router.post('/', async (req, res) => {
     const player = new Player({
         name: req.body.name
     })
-    //try {
+    try {
         const newPlayer = await player.save()
         res.redirect(`setup`)
-    /*} catch {
+    } catch {
+        alert('Error creating Player')
         res.redirect('/')
-        console.error('Error creating Player')
-    }*/
+    }
 })
 
 // Delete Player Route
@@ -44,7 +45,8 @@ router.delete('/:id', async (req, res) => {
             alert("You can't delete someone who does not exist.")
             res.redirect('/')
         } else {
-        res.redirect(`/setup/${player.id}`)
+            alert('An unknown error has occurred.')
+            res.redirect(`/setup/${player.id}`)
         }
 
     }
