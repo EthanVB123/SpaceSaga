@@ -47,13 +47,18 @@ router.post('/', async (req, res) => {
 
 // Resume Game is coming below - now fully operational!
 router.get('/resume', async (req, res) => {
-    players = await Player.find({})
-    res.render('games/resume', {players: players}) 
+    try {
+        players = await Player.find({})
+        res.render('games/resume', {players: players}) 
+    } catch {
+        alert('Error resuming game.')
+        res.redirect('/')
+    }
 })
 router.post('/resume/check', async (req, res) => {
     let game
     let player
-    //try {
+    try {
     console.log(req.body.player)
     player = await Player.findById(req.body.player)
     if (player.game != undefined && player.game != null) {
@@ -68,14 +73,15 @@ router.post('/resume/check', async (req, res) => {
         alert('User is not in a game')
         res.redirect('/')
     }
-    /*} catch {
-        console.error('Error resume game')
+    } catch {
+        console.error('Error resuming game')
         res.redirect('/')
-    }*/ 
+    } 
 })
 
 // Joined Game Route
 router.get('/:id', async (req, res) => {
+    try {
     const game = await Game.findById(req.params.id)
     const player1 = await Player.findById(game.player1)
     const player2 = await Player.findById(game.player2)
@@ -85,6 +91,10 @@ router.get('/:id', async (req, res) => {
     res.render('games/gameone', {game: game, player1: player1, player2: player2, player3: player3, player4: player4})
     } else {
     res.render('games/start', {game: game, player1: player1, player2: player2, player3: player3, player4: player4})
+    }
+    } catch {
+        alert('Error joining game')
+        res.redirect('/')
     }
 })
 
@@ -126,7 +136,7 @@ router.get('/:id/edit', async (req, res) => {
 router.put('/:id', async (req, res) => {
     let game
     let player
-    //try {
+    try {
         game = await Game.findById(req.params.id)
         player = await Player.findById(req.body.playerselect)
         if (player.game == undefined || player.game == null) {
@@ -178,24 +188,17 @@ router.put('/:id', async (req, res) => {
     } else {
         alert(`This player is already in a game!`)
     }
-    /*} catch {
-        if (game == null) {
-            res.redirect('/')
-        } else {
-        //res.redirect('/game/edit', {
-        //    game: game,
-
-        //}
+    } catch {
         res.redirect('/')
-        console.error('Error updating Game')}
-    } */
+        alert('Error Adding Player')
+    }
 })
 
 // Remove player from game
 router.put('/:id/:n/remove', async (req, res) => { // n is an int from 1-4 inclusive - it is the player to discard
     let game
     let player
-    //try {
+    try {
         game = await Game.findById(req.params.id)
         if (req.params.n == 1) {
             player = await Player.findById(game.player1)
@@ -249,10 +252,10 @@ router.put('/:id/:n/remove', async (req, res) => { // n is an int from 1-4 inclu
             await player.save()
         }
         res.redirect(`/game/${game.id}`)
-            /*} catch {
-        console.log('Error - games.js line 214')
+    } catch {
+        alert('Error deleting game')
         res.redirect('/')
-    }*/
+    }
 })
 
 // Update game so that it has now started
@@ -273,8 +276,8 @@ router.put('/:id/start', async (req, res) => {
             alert(`This game only has ${game.numberPlayers} player(s); it needs 4 players to start.`) // code so that unique message if player singular or players plural?
         }
     } catch {
-        res.redirect(`/game/${req.params.id}`)
         alert('Error with updating the game.')
+        res.redirect(`/game/${req.params.id}`)
     }
 })
 
@@ -283,12 +286,17 @@ router.get('/resume', (req, res) => {
     res.render('/games/resume', {players: players}) // not functional... requires a post here and ejs tidyup
 })
 router.get('/resume/check', async (req, res) => {
+    try {
     const player = await Player.findById(req.body.playerselect)
     const game = await Game.findById(player.game)
     if (req.body.password == game.password) {
         res.redirect(`/game/${game._id}`)
     } else {
         alert('User and password do not match')
+        res.redirect('/')
+    }
+    } catch {
+        alert('Error resuming game')
         res.redirect('/')
     }
 })
@@ -306,9 +314,11 @@ router.delete('/:id', async (req, res) => {
         }
     } catch {
         if (game == null) {
+            alert('Game does not exist')
             res.redirect('/')
         } else {
-        res.redirect(`/game/${game.id}`)
+            alert('Error deleting game')
+            res.redirect(`/game/${game.id}`)
         }
     }
 })
